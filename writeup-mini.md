@@ -83,8 +83,6 @@ nc 10.0.3.193 5555
 whoami
 
 pwd
-
-locate flag{
 ```
 
 ### 6.6 Identify a file with a promising filename
