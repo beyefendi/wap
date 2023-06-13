@@ -6,7 +6,7 @@
 nmap 10.0.3.193
 ```
 
-## 2) Signup the ewebpage
+## 2) Signup on the webpage
 
 - `http://10.0.3.193/php/inscription.php`
 
