@@ -85,8 +85,6 @@ whoami
 pwd
 
 locate flag{
-
-cat /var/www/flag{3b200052e26a8c685c53ab507ce4dca76cf53d9936fad0}.jpg
 ```
 
 ### 6.6 Identify a file with a promising filename
