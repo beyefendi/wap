@@ -133,8 +133,6 @@ whoami
 
 pwd
 
-locate flag{
-
 cat /etc/shadow
 ```
 
