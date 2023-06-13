@@ -151,5 +151,5 @@ cat /root/.bash_history
 
 ### 9.2 Access the password-protected file
 ```sh
-unzip -P x5^#CNYK-Ng@MkHZR748 /home/emre/Downloads/leaks.zip
+unzip -P "x5^#CNYK-Ng@MkHZR748" /home/emre/Downloads/leaks.zip
 ```
